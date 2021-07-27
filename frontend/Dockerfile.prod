@@ -3,17 +3,13 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
+#url production
+ENV REACT_APP_API_URL=http://104.131.24.150:3001/api 
 RUN npm run build
 
 # Step 2: Production
 FROM nginx:1.12-alpine 
-RUN addgroup app && adduser -S -G app app
-RUN mkdir /app && chown app:app /app
-USER app
-
-ENV API_URL=http://localhost:5000/api
-
+EXPOSE 80
 COPY --from=build-stage /app/build /usr/share/nginx/html
 
-EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]

@@ -2,8 +2,20 @@ version: '3.8'
 
 services:
   api:
-    build: ./resi-management-api
+    build: ./backend
     ports:
       - 5000:5000
+    volumes:
+      - ./backend:/app
+    environment:
+      DATABASE_URL: postgres://postgres:123@127.0.0.1:5432/resi-book_postgres
+    command: npm run dev
+  postgres:
+    image: postgres:11.2-alpine
+    ports:
+      - 5432
+    volumes:
+      - resi-book:/data/db
+
 volumes:
   resi-book:

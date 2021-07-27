@@ -63,6 +63,7 @@ if (cluster.isMaster) {
       delayMs: 1500,
     })
   );
+  app.use(ignoreFavicon);
 
   const route = require('./routes');
   app.use('/api', route);
@@ -70,8 +71,6 @@ if (cluster.isMaster) {
   app.get('/', (req, res) => {
     res.send({ message: 'Welcome to Resi_Book-Api!' });
   });
-
-  app.use(ignoreFavicon);
 
   const port = process.env.PORT || 5000;
   const server = app.listen(port, () => {
