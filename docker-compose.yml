@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./frontend
+    ports:
+      - 3000:3000
+  api:
+    build: ./backend
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend:/app
+    environment:
+      DATABASE_URL: postgres://postgres:123@127.0.0.1:5432/resi-book_postgres?schema=public
+  postgres:
+    image: postgres:11.2-alpine
+    restart: always
+    ports:
+      - 5432
+    volumes:
+      - resi-book:/var/lib/postgresql/data
+volumes:
+  resi-book:

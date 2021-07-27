@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  api:
+    build: ./resi-management-api
+    ports:
+      - 5000:5000
+volumes:
+  resi-book:

@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "numberResi": "BL231ergp",
+    "productName": "Headset JBL",
+    "address": "Lamongan Dukun Gresik",
+    "courier": "JnT",
+    "status": "send",
+    "date": "19 Agustus 2021",
+    "priceProduct": 180000,
+    "postagePrice": 20000,
+    "history": [
+      {
+        "date": "20-10-10",
+        "message": "lorem ipsum",
+        "messageBy": "joni"
+      },
+      {
+        "date": "20-10-10",
+        "message": "lorem ipsum",
+        "messageBy": "budi"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "numberResi": "SP231ergp",
+    "productName": "Keyboard JBL",
+    "address": "Lamongan Dukun Gresik",
+    "courier": "JnT",
+    "status": "send",
+    "date": "19 Agustus 2021",
+    "priceProduct": 180000,
+    "postagePrice": 20000
+  },
+  {
+    "id": 3,
+    "numberResi": "TJNT231ergp",
+    "productName": "Mouse JBL",
+    "address": "Lamongan Dukun Gresik",
+    "courier": "JnT",
+    "status": "send",
+    "date": "19 Agustus 2021",
+    "priceProduct": 180000,
+    "postagePrice": 20000
+  }
+]
