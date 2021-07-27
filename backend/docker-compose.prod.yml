@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  api:
+    build: ./backend
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend:/app
+    environment:
+      DATABASE_URL:
+  postgres:
+    image: postgres:11.2-alpine
+    ports:
+      - 5432
+    volumes:
+      - resi-book:/data/db
+
+volumes:
+  resi-book:
