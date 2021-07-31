@@ -68,7 +68,7 @@ exports.getResi = async (req, res) => {
     const dataResi = await prisma.resi.findMany({
       include: {
         user: true,
-        Comment: true,
+        comment: true,
       },
     });
     res.status(200).json({
@@ -93,7 +93,7 @@ exports.getSingleResi = async (req, res) => {
         id: resiID,
       },
       include: {
-        Comment: true,
+        comment: true,
       },
     });
 

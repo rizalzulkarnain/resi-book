@@ -41,22 +41,23 @@ model Resi {
   user   User?   @relation(fields: [userId], references: [id])
   userId String?
 
-  Comment Comment[]
+  comment Comment[]
   @@map("resi")
 }
 
 model Comment {
-  id      String  @id @default(cuid())
-  message String?
-
-  user      User?   @relation(fields: [messageBy], references: [email])
+  id        String  @id @default(cuid())
+  message   String?
   messageBy String?
-  resi      Resi?   @relation(fields: [resiId], references: [id])
-  resiId    String?
+
+  resi   Resi?   @relation(fields: [resiId], references: [id])
+  resiId String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
   @@map("comment")
 }
 

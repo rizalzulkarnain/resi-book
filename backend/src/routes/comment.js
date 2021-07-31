@@ -12,9 +12,8 @@ const validation = require('../middlewares/validation');
 
 router.post('/', validation.validateComment, addComment);
 router.get('/', getComments);
-router.put('/', updateComment);
+router.put('/', validation.validateComment, updateComment);
 router.post('/:commentId', updateComment);
 router.delete('/:commentId', deleteComment);
-router.delete('/', deleteAllComments);
 
 module.exports = router;

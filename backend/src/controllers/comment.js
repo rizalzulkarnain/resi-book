@@ -24,13 +24,14 @@ exports.addComment = async (req, res) => {
         });
       }
 
-      const { message } = req.body;
+      const { message, messageBy, resiId, userId } = req.body;
 
       const addComment = await prisma.comment.create({
         data: {
           message,
-          messageBy: user.name,
-          updatedAt,
+          messageBy,
+          resiId,
+          userId,
         },
       });
 
@@ -49,17 +50,89 @@ exports.addComment = async (req, res) => {
 };
 
 exports.getComments = async (req, res) => {
-  res.send('get comment');
+  try {
+    const comments = await prisma.comment.findMany({
+      include: {
+        user: true,
+        resi: true,
+      },
+    });
+
+    res.status(200).json({
+      message: 'Getting Comments Successfully!',
+      comments,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      success: false,
+      error: error.message,
+    });
+  }
 };
 
 exports.updateComment = async (req, res) => {
-  res.send('update comment');
+  try {
+    const validationErrors = validation.validationResult(req);
+
+    const errors = [];
+
+    if (!validationErrors.isEmpty) {
+      validationErrors.errors.forEach((error) => {
+        errors.push(error.param);
+        return res.status(400).json({
+          error: error.msg,
+        });
+      });
+    } else {
+      if (errors.length) {
+        return res.status(400).json({
+          success: false,
+          errors,
+        });
+      }
+
+      const { message } = req.body;
+
+      const updateComment = await prisma.comment.update({
+        data: {
+          message,
+        },
+      });
+
+      res.status(200).json({
+        message: 'Update Comment Successfully',
+        updateComment,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      success: false,
+      error: error.message,
+    });
+  }
 };
 
 exports.deleteComment = async (req, res) => {
-  res.send('delete comment');
-};
+  try {
+    const { commentID } = req.params;
 
-exports.deleteAllComments = async (req, res) => {
-  res.send('delete all comments');
+    const deletedComment = await prisma.comment.delete({
+      where: {
+        id: commentID,
+      },
+    });
+
+    res.status(200).json({
+      message: 'Delete Comment Successully !',
+      deletedComment,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({
+      success: false,
+      error: error.message,
+    });
+  }
 };
