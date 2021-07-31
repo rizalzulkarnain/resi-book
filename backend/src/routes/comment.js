@@ -8,8 +8,9 @@ const {
   deleteComment,
   deleteAllComments,
 } = require('../controllers/comment');
+const validation = require('../middlewares/validation');
 
-router.post('/', addComment);
+router.post('/', validation.validateComment, addComment);
 router.get('/', getComments);
 router.put('/', updateComment);
 router.post('/:commentId', updateComment);

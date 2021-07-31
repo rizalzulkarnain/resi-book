@@ -21,9 +21,21 @@ router.post(
   validation.validateName,
   registerUser
 );
-router.post('/login', loginUser);
+router.post(
+  '/login',
+  validation.validateEmail,
+  validation.validatePassword,
+  validation.validatePasswordMatch,
+  loginUser
+);
 router.post('/reset-password', validation.validateEmail, resetPasswordUser);
-router.patch('/reset-password', forgotPasswordUser);
+router.patch(
+  '/reset-password',
+  validation.validateEmail,
+  validation.validatePassword,
+  validation.validatePin,
+  forgotPasswordUser
+);
 router.post('/logout', logoutUser);
 router.get('/user/:id', auth, getUser);
 

@@ -21,7 +21,13 @@ router.post(
 );
 router.get('/', auth, getResi);
 router.get('/:resiID', auth, getSingleResi);
-router.put('/:resiID', auth, updateResi);
+router.put(
+  '/:resiID',
+  auth,
+  validation.validateAddResi,
+  validation.validatePrice,
+  updateResi
+);
 router.delete('/:resiID', auth, deleteResi);
 
 module.exports = router;

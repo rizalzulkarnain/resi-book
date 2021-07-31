@@ -65,7 +65,7 @@ if (cluster.isMaster) {
   );
   app.use(ignoreFavicon);
 
-  const route = require('./routes');
+  const route = require('./routes/index');
   app.use('/api', route);
 
   app.get('/', (req, res) => {

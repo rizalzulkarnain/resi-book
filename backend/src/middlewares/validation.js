@@ -29,6 +29,14 @@ module.exports.validateAddResi = body(['numberResi', 'productName', 'address'])
 module.exports.validatePrice = body(['priceProduct', 'postagePrice'])
   .isDecimal()
   .isLength({ min: 3 })
-  .withMessage('Price Field  has to be at least 3 characters long.');
+  .withMessage('Price Field has to be at least 3 characters long.');
+
+module.exports.validateComment = body('message')
+  .isLength({ min: 5 })
+  .withMessage('Comment Field has to be at least 5 characters long.');
+
+module.exports.validatePin = body('pin')
+  .isInt()
+  .withMessage('Pin Field has must be number.');
 
 module.exports.validationResult = validationResult;

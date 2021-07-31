@@ -300,35 +300,16 @@ exports.logoutUser = (req, res) => {
 
 exports.getUser = async (req, res) => {
   try {
-    const validationErrors = validation.validationResult(req);
-    const errors = [];
+    const userId = await prisma.user.findUnique({
+      where: {
+        id: req.params.id,
+      },
+    });
 
-    if (!validationErrors.isEmpty()) {
-      validationErrors.errors.forEach((error) => {
-        errors.push(error.param);
-        return res.status(400).json({
-          error: error.msg,
-        });
-      });
-    } else {
-      if (errors.length) {
-        return res.status(400).json({
-          success: false,
-          errors,
-        });
-      }
-
-      const userId = await prisma.user.findUnique({
-        where: {
-          id: req.params.id,
-        },
-      });
-
-      res.status(200).json({
-        message: 'Getting User ID Successully !',
-        userId,
-      });
-    }
+    res.status(200).json({
+      message: 'Getting User ID Successully !',
+      userId,
+    });
   } catch (error) {
     console.error(error);
     res.status(400).json({
