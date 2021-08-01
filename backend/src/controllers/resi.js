@@ -85,7 +85,8 @@ exports.getResi = async (req, res) => {
       (a, b) => a + b
     );
 
-    const month = getResi.Resi.map((o) => o.date.split(' ')[1]);
+    const getMonth = getResi.Resi.map((o) => o.date.split(' ')[1]);
+    const month = [...new Set(getMonth)];
 
     res.status(200).json({
       message: 'Getting Data Resi Successully !',
@@ -93,8 +94,8 @@ exports.getResi = async (req, res) => {
       total: {
         totalPriceProduct,
         totalPostagePrice,
+        month,
       },
-      month,
     });
   } catch (error) {
     console.error(error);
