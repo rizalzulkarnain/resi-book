@@ -76,9 +76,25 @@ exports.getResi = async (req, res) => {
         Comment: true,
       },
     });
+
+    const totalPriceProduct = getResi.Resi.map((o) => o.priceProduct).reduce(
+      (a, b) => a + b
+    );
+
+    const totalPostagePrice = getResi.Resi.map((o) => o.postagePrice).reduce(
+      (a, b) => a + b
+    );
+
+    const month = getResi.Resi.map((o) => o.date.split(' ')[1]);
+
     res.status(200).json({
       message: 'Getting Data Resi Successully !',
       getResi,
+      total: {
+        totalPriceProduct,
+        totalPostagePrice,
+      },
+      month,
     });
   } catch (error) {
     console.error(error);
