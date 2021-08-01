@@ -13,16 +13,16 @@ const validation = require('../middlewares/validation');
 const { auth } = require('../middlewares/auth');
 
 router.post(
-  '/',
+  '/:userId',
   auth,
   validation.validateAddResi,
   validation.validatePrice,
   addResi
 );
-router.get('/', auth, getResi);
-router.get('/:resiID', auth, getSingleResi);
+router.get('/:userId', auth, getResi);
+router.get('/:resiId', auth, getSingleResi);
 router.put(
-  '/:resiID',
+  '/:resiId',
   auth,
   validation.validateAddResi,
   validation.validatePrice,

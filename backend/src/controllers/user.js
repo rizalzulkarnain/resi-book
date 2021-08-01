@@ -271,7 +271,7 @@ exports.forgotPasswordUser = async (req, res) => {
         });
 
         res.status(200).json({
-          message: 'Update Password Successfully',
+          message: 'Update Password and Delete Pin Successfully',
           updatedPassword,
           deletedPin,
         });

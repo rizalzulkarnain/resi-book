@@ -10,10 +10,12 @@ const {
 } = require('../controllers/comment');
 const validation = require('../middlewares/validation');
 
-router.post('/', validation.validateComment, addComment);
-router.get('/', getComments);
-router.put('/', validation.validateComment, updateComment);
-router.post('/:commentId', updateComment);
-router.delete('/:commentId', deleteComment);
+const { auth } = require('../middlewares/auth.js');
+
+router.post('/', auth, validation.validateComment, addComment);
+router.get('/', auth, getComments);
+router.put('/:commentId', auth, validation.validateComment, updateComment);
+router.delete('/:commentId', auth, deleteComment);
+router.delete('/delete-all', auth, deleteAllComments);
 
 module.exports = router;

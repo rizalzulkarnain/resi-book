@@ -23,8 +23,8 @@ exports.addResi = async (req, res) => {
         });
       }
 
+      const { userId } = req.params;
       const {
-        userId,
         numberResi,
         productName,
         address,
@@ -65,15 +65,20 @@ exports.addResi = async (req, res) => {
 
 exports.getResi = async (req, res) => {
   try {
-    const dataResi = await prisma.resi.findMany({
+    const { userId } = req.params;
+
+    const getResi = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
       include: {
-        user: true,
-        comment: true,
+        Resi: true,
+        Comment: true,
       },
     });
     res.status(200).json({
       message: 'Getting Data Resi Successully !',
-      dataResi,
+      getResi,
     });
   } catch (error) {
     console.error(error);
@@ -86,11 +91,11 @@ exports.getResi = async (req, res) => {
 
 exports.getSingleResi = async (req, res) => {
   try {
-    const { resiID } = req.params;
+    const { resiId } = req.params;
 
     const dataResi = await prisma.resi.findUnique({
       where: {
-        id: resiID,
+        id: resiId,
       },
       include: {
         comment: true,
@@ -130,7 +135,7 @@ exports.updateResi = async (req, res) => {
         });
       }
 
-      const { resiID } = req.params;
+      const { resiId } = req.params;
       const {
         numberResi,
         productName,
@@ -144,7 +149,7 @@ exports.updateResi = async (req, res) => {
 
       const updatedResi = await prisma.resi.update({
         where: {
-          id: resiID,
+          id: resiId,
         },
         data: {
           numberResi,
