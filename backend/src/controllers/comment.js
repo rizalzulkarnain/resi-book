@@ -24,14 +24,15 @@ exports.addComment = async (req, res) => {
         });
       }
 
-      const { message, messageBy, resiId, userId } = req.body;
+      const { resiId } = req.params;
+      const { message, messageBy, email } = req.body;
 
       const addComment = await prisma.comment.create({
         data: {
           message,
           messageBy,
+          email,
           resiId,
-          userId,
         },
       });
 
@@ -51,16 +52,21 @@ exports.addComment = async (req, res) => {
 
 exports.getComments = async (req, res) => {
   try {
-    const comments = await prisma.comment.findMany({
+    const { resiId } = req.params;
+
+    const getComments = await prisma.resi.findUnique({
+      where: {
+        id: resiId,
+      },
       include: {
+        comment: true,
         user: true,
-        resi: true,
       },
     });
 
     res.status(200).json({
       message: 'Getting Comments Successfully!',
-      comments,
+      getComments,
     });
   } catch (error) {
     console.error(error);
@@ -143,17 +149,11 @@ exports.deleteComment = async (req, res) => {
 
 exports.deleteAllComments = async (req, res) => {
   try {
-    const { userId } = req.body;
-
-    const getUserId = await prisma.comment.findUnique({
-      where: {
-        id: userId,
-      },
-    });
+    const { resiId } = req.body;
 
     const deletedAllComments = await prisma.comment.deleteMany({
       where: {
-        id: getUserId,
+        id: resiId,
       },
     });
 

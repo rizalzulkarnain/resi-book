@@ -36,7 +36,7 @@ CREATE TABLE "comment" (
     "resiId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "userId" TEXT,
+    "email" TEXT,
 
     PRIMARY KEY ("id")
 );
@@ -65,4 +65,4 @@ ALTER TABLE "resi" ADD FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE 
 ALTER TABLE "comment" ADD FOREIGN KEY ("resiId") REFERENCES "resi"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "comment" ADD FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "comment" ADD FOREIGN KEY ("email") REFERENCES "user"("email") ON DELETE SET NULL ON UPDATE CASCADE;
