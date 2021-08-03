@@ -1,8 +1,10 @@
+import { StandardChartContainer } from '../../../styles';
+
 const StandardChart = () => {
   return (
-    <div>
+    <StandardChartContainer>
       <h1>Standard Chart</h1>
-    </div>
+    </StandardChartContainer>
   );
 };
 
