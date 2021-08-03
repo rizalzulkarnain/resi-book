@@ -73,7 +73,6 @@ exports.getResi = async (req, res) => {
       },
       include: {
         Resi: true,
-        Comment: true,
       },
     });
 
@@ -85,16 +84,31 @@ exports.getResi = async (req, res) => {
       (a, b) => a + b
     );
 
-    const getMonth = getResi.Resi.map((o) => o.date.split(' ')[1]);
-    const month = [...new Set(getMonth)];
-
     res.status(200).json({
       message: 'Getting Data Resi Successully !',
       getResi,
+      color: [
+        'aqua',
+        'black',
+        'blue',
+        'fuchsia',
+        'gray',
+        'green',
+        'lime',
+        'maroon',
+        'navy',
+        'olive',
+        'orange',
+        'purple',
+        'red',
+        'silver',
+        'teal',
+        'white',
+        'yellow',
+      ],
       total: {
         totalPriceProduct,
         totalPostagePrice,
-        month,
       },
     });
   } catch (error) {

@@ -1,5 +1,7 @@
 import MetaData from '../../Components/MetaData';
 import Breadcump from '../../Components/Breadcump/Breadcump';
+import StandardChart from '../../Components/Chart/StandardChart/StandardChart';
+import PieChart from '../../Components/Chart/PieChart/PieChart';
 
 import { ReportContainer } from '../../styles';
 
@@ -9,7 +11,11 @@ const Report = () => {
       <MetaData title="Analytics Page" />
       <ReportContainer>
         <Breadcump page="Report" />
-        <h1>Report and Analysis</h1>
+
+        <div>
+          <StandardChart />
+          <PieChart />
+        </div>
       </ReportContainer>
     </>
   );

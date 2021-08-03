@@ -14,14 +14,14 @@ services:
     volumes:
       - ./backend:/app
     environment:
-      DATABASE_URL: postgres://postgres:123@127.0.0.1:5432/resi-book_postgres?schema=public
+      DATABASE_URL: postgres://postgres:123@127.0.0.1:5432/backend_resi-book
     command: npm run dev
   postgres:
-    image: postgres:11.2-alpine
+    image: postgres:13-alpine
     ports:
       - 5432
     volumes:
-      - resi-book:/data/db
+      - resi-book:/var/lib/postgresql/data
 
 volumes:
   resi-book:

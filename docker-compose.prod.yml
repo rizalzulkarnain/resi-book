@@ -13,15 +13,15 @@ services:
     ports:
       - 5000:5000
     environment:
-      DATABASE_URL: postgres://postgres:123@127.0.0.1:5432/resi-book_postgres
+      DATABASE_URL: 
     command: npm run dev
     restart: unless-stopped
   postgres:
-    image: postgres:11.2-alpine
+    image: postgres:13-alpine
     ports:
-      - 5432
+      - 49158:5432
     volumes:
-      - resi-book:/data/db
+      - resi-book:/var/lib/postgresql/data
     restart: unless-stopped
 
 volumes:

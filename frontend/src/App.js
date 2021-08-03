@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 
 import AuthLogin from './Pages/Auth/AuthLogin';
@@ -19,26 +20,30 @@ import { GlobalStyle } from './styles';
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+const queryClient = new QueryClient();
 const App = () => {
   return (
     <>
-      <Router>
-        <GlobalStyle />
-        <ToastContainer />
-        <Switch>
-          <Route exact path="/" component={AuthLogin} />
-          <Route path="/register" component={AuthRegister} />
-          <Route path="/reset" component={PasswordReset} />
-          <Layout>
-            <PrivateRoute path="/dashboard" new component={Dashboard} />
-            <PrivateRoute path="/new" component={NewResi} />
-            <PrivateRoute path="/resi/:id" component={Resi} />
-            <PrivateRoute path="/update/:id" component={UpdateResi} />
-            <PrivateRoute path="/about" component={About} />
-            <PrivateRoute path="/report" component={Report} />
-          </Layout>
-        </Switch>
-      </Router>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <GlobalStyle />
+          <ToastContainer />
+          <Switch>
+            <Route exact path="/" component={AuthLogin} />
+            <Route path="/register" component={AuthRegister} />
+            <Route path="/reset" component={PasswordReset} />
+            <Layout>
+              <PrivateRoute path="/dashboard" new component={Dashboard} />
+              <PrivateRoute path="/new" component={NewResi} />
+              <PrivateRoute path="/resi/:id" component={Resi} />
+              <PrivateRoute path="/update/:id" component={UpdateResi} />
+              <PrivateRoute path="/about" component={About} />
+              <PrivateRoute path="/report" component={Report} />
+            </Layout>
+          </Switch>
+        </Router>
+      </QueryClientProvider>
     </>
   );
 };

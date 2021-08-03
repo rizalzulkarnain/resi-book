@@ -16,3 +16,5 @@ export * from './MsgHistoryStyle';
 export * from './ReplyFormStyle';
 export * from './AboutStyle';
 export * from './ReportStyle';
+export * from './PieChartStyle';
+export * from './StandardChartStyle';

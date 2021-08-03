@@ -1,7 +1,12 @@
 version: '3.8'
 
 services:
-  web:
-    build: ./frontend
+ web:
+    build: ./
     ports:
       - 3000:3000
+    volumes:
+      - ./app
+
+volumes:
+  resi-book:
