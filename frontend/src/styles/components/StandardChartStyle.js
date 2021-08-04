@@ -6,7 +6,7 @@ export const StandardChartContainer = styled.div`
   box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
 
   padding: 20px;
-  display: grid;
+  display: flex;
   justify-content: center;
 
   margin-bottom: 20px;

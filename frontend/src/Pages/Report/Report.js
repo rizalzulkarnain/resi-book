@@ -11,9 +11,8 @@ const Report = () => {
       <MetaData title="Analytics Page" />
       <ReportContainer>
         <Breadcump page="Report" />
-
         <div>
-          <StandardChart />
+          <StandardChart grid />
           <PieChart />
         </div>
       </ReportContainer>
